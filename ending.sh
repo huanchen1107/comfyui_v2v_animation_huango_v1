@@ -6,10 +6,16 @@ echo "（如果還沒寫，請立刻更新檔案再繼續）"
 echo ""
 
 # 讓終端機稍微暫停，確保 AI/User 確認
-echo "🤖 嗨，AI 助手！請根據今天的進度撰寫新的 Tutorial_#.md 教學文件。"
-echo "（編號與內容需接續上一個 Tutorial，確保教學的邏輯連貫性）"
+echo "🤖 正在讀取系統底層 Log 並更新 dialog.md (包含所有歷史對話)..."
+python3 reconstruct_dialog.py
+
 echo ""
-read -p "請確認開發日誌與教學文件皆已更新？ (按 Enter 繼續推送至 GitHub)"
+echo "🤖 嗨，AI 助手！請檢查以下事項："
+echo "1. 今天的進度是否已寫入開發日誌？"
+echo "2. 是否已接續編號撰寫新的 Tutorial_#.md？"
+echo "3. dialog.md 是否已自動更新完畢？"
+echo ""
+read -p "請確認以上事項皆已完成？ (按 Enter 繼續推送至 GitHub)"
 
 echo "📦 正在將所有檔案推送到 GitHub..."
 git add .
