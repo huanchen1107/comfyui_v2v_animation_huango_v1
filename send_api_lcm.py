@@ -5,9 +5,10 @@ with open('/Users/huanchen/Documents/ComfyUI/user/default/workflows/00008_prompt
 
 prompt = {str(i): data[str(i)] for i in range(1, 13)}
 
-# Node 1 (Load Video)
+# Node 1 (Load Video) - High Res 10s Version
 prompt["1"]["inputs"]["frame_load_cap"] = 0
-prompt["1"]["inputs"]["video"] = "youtube_20s.mp4"
+prompt["1"]["inputs"]["video"] = "youtube_10s_896p.mp4"
+prompt["1"]["inputs"]["custom_width"] = 896
 prompt["1"]["inputs"]["force_rate"] = 8  # Set to 8 FPS
 
 # Node 13 (Context Options)
@@ -29,11 +30,11 @@ prompt["4"]["class_type"] = "ADE_AnimateDiffLoaderGen1"
 prompt["4"]["inputs"] = {
     "model_name": "mm_sd_v15_v2.ckpt",
     "beta_schedule": "sqrt_linear (AnimateDiff)",
-    "model": ["3", 0], # Input from LoraLoader (Ghibli)
+    "model": ["3", 0],
     "context_options": ["13", 0]
 }
 
-# Add Node 99 (LCM LoRA) between Ghibli LoRA (Node 3) and Checkpoint (Node 2)
+# Add Node 99 (LCM LoRA)
 prompt["99"] = {
     "inputs": {
         "lora_name": "lcm-lora-sdv1-5.safetensors",
@@ -45,7 +46,7 @@ prompt["99"] = {
     "class_type": "LoraLoader"
 }
 
-# Fix Node 3 (Ghibli LoRA) to take input from Node 99
+# Fix Node 3 (Ghibli LoRA)
 prompt["3"]["inputs"]["model"] = ["99", 0]
 prompt["3"]["inputs"]["clip"] = ["99", 1]
 
@@ -60,13 +61,13 @@ prompt["10"]["inputs"]["steps"] = 6
 prompt["10"]["inputs"]["cfg"] = 1.5
 prompt["10"]["inputs"]["sampler_name"] = "lcm"
 prompt["10"]["inputs"]["scheduler"] = "sgm_uniform"
-prompt["10"]["inputs"]["denoise"] = 0.8  # Slight variation from 1.0 for v2v
+prompt["10"]["inputs"]["denoise"] = 0.8
 
 # Node 12 (Video Combine)
 prompt["12"]["inputs"]["audio"] = ["1", 2]
 prompt["12"]["inputs"]["frame_rate"] = 8
 prompt["12"]["inputs"]["pingpong"] = False
-prompt["12"]["inputs"]["filename_prefix"] = "ghibli_lcm_8fps"
+prompt["12"]["inputs"]["filename_prefix"] = "ghibli_highres_10s"
 
 payload = {
     "prompt": prompt,
