@@ -63,6 +63,7 @@ prompt["10"]["inputs"]["scheduler"] = "sgm_uniform"
 prompt["10"]["inputs"]["denoise"] = 0.8  # Slight variation from 1.0 for v2v
 
 # Node 12 (Video Combine)
+prompt["12"]["inputs"]["audio"] = ["1", 2]
 prompt["12"]["inputs"]["frame_rate"] = 8
 prompt["12"]["inputs"]["pingpong"] = False
 prompt["12"]["inputs"]["filename_prefix"] = "ghibli_lcm_8fps"
