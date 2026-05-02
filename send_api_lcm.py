@@ -1,6 +1,6 @@
 import json, urllib.request, uuid
 
-with open('/Users/huanchen/Documents/ComfyUI/user/default/workflows/00008_prompt.json', 'r') as f:
+with open('/Users/huanchen/Documents/ComfyUI/ComfyUI-Kernel/user/default/workflows/00008_prompt.json', 'r') as f:
     data = json.load(f)
 
 prompt = {str(i): data[str(i)] for i in range(1, 13)}
